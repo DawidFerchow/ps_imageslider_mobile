@@ -31,6 +31,7 @@ class Ps_HomeSlide extends ObjectModel
 	public $url;
 	public $legend;
 	public $image;
+	public $image_mobile;
 	public $active;
 	public $position;
 	public $id_shop;
@@ -52,6 +53,7 @@ class Ps_HomeSlide extends ObjectModel
 			'legend' =>			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isCleanHtml', 'size' => 255),
 			'url' =>			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isUrl', 'required' => true, 'size' => 255),
 			'image' =>			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isCleanHtml', 'size' => 255),
+			'image_mobile' =>			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isCleanHtml', 'size' => 255),
 		)
 	);
 
@@ -78,11 +80,18 @@ class Ps_HomeSlide extends ObjectModel
 		$res = true;
 
 		$images = $this->image;
+		$images_mobile = $this->image_mobile;
 		foreach ($images as $image)
 		{
 			if (preg_match('/sample/', $image) === 0)
 				if ($image && file_exists(__DIR__.'/images/'.$image))
 					$res &= @unlink(__DIR__.'/images/'.$image);
+		}
+		foreach ($images_mobile as $image_mobile)
+		{
+			if (preg_match('/sample/', $image_mobile) === 0)
+				if ($image_mobile && file_exists(__DIR__.'/images/'.$image_mobile))
+					$res &= @unlink(__DIR__.'/images/'.$image_mobile);
 		}
 
 		$res &= $this->reOrderPositions();

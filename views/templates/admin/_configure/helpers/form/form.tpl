@@ -27,14 +27,17 @@
 {block name="field"}
 	{if $input.type == 'file_lang'}
 		<div class="row">
-			{foreach from=$languages item=language}
+			{foreach from=$languages item=language name=foo}
 				{if $languages|count > 1}
 					<div class="translatable-field lang-{$language.id_lang}" {if $language.id_lang != $defaultFormLanguage}style="display:none"{/if}>
 				{/if}
 					<div class="col-lg-6">
-						{if isset($fields[0]['form']['images'])}
+						{if $input.name == 'image' && isset($fields[0]['form']['images'])}
 						<img src="{$image_baseurl}{$fields[0]['form']['images'][$language.id_lang]}" class="img-thumbnail" />
 						{/if}
+            {if $input.name == 'image_mobile' && isset($fields[0]['form']['images_mobile'])}
+            <img src="{$image_baseurl}{$fields[0]['form']['images_mobile'][$language.id_lang]}" class="img-thumbnail" />
+            {/if}
 						<div class="dummyfile input-group">
 							<input id="{$input.name}_{$language.id_lang}" type="file" name="{$input.name}_{$language.id_lang}" class="hide-file-upload" />
 							<span class="input-group-addon"><i class="icon-file"></i></span>

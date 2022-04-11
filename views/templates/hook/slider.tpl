@@ -24,6 +24,7 @@
  *}
 
 {if $homeslider.slides}
+{print_r|$homeslider}
   <div class="homeslider-container" data-interval="{$homeslider.speed}" data-wrap="{$homeslider.wrap}" data-pause="{$homeslider.pause}">
     <ul class="rslides">
       {foreach from=$homeslider.slides item=slide}
